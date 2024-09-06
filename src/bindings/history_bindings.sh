@@ -34,9 +34,9 @@ history_input=(
 				"query=\$(echo \"\$query\" | xargs | tr -s ' ');"
 				'if [ -z "$query" ]; then'
 					':;'
-				"elif /usr/bin/grep -cim1 -x \" *\$query *\" $purr_history_cache; then"
-					"line=\$(/usr/bin/grep -n -x \" *\$query *\" $purr_history_cache | cut -d : -f 1);"
-					"/usr/bin/sed -i \"\${line}d\" $purr_history_cache;"
+				"elif grep -cim1 -x \" *\$query *\" $purr_history_cache; then"
+					"line=\$(grep -n -x \" *\$query *\" $purr_history_cache | cut -d : -f 1);"
+					"sed -i \"\${line}d\" $purr_history_cache;"
 					"echo \$query >> $purr_history_cache;"
 					"echo 0 >| $purr_history_pointer_cache;"
 				'else;'
@@ -54,7 +54,7 @@ bind_commands+=('--bind' "change:$history_input")
 # wipe this pointer wheneever we add a new history entry.
 history_up=(
 	'transform-query('
-		"line_count=\$(/usr/bin/wc -l < $purr_history_cache);"
+		"line_count=\$(wc -l < $purr_history_cache);"
 		"cur_pointer=\$(cat $purr_history_pointer_cache);"
 		'$(( cur_pointer += 1 ));'
 		'if [ $cur_pointer -lt $line_count ]; then'
@@ -63,7 +63,7 @@ history_up=(
 			'$(( cur_pointer -= 1));'
 		'fi;'
 		'line_to_get="$((line_count - cur_pointer))";'
-		"/usr/bin/sed -n -e \${line_to_get}p $purr_history_cache;"
+		"sed -n -e \${line_to_get}p $purr_history_cache;"
 	')'
 )
 bind_commands+=('--bind' "alt-shift-up:$history_up")
@@ -75,7 +75,7 @@ rebind_in_serial_command_suite "alt-shift-up"
 # See above.
 history_down=(
 	'transform-query('
-		"line_count=\$(/usr/bin/wc -l < $purr_history_cache);"
+		"line_count=\$(wc -l < $purr_history_cache);"
 		"cur_pointer=\$(cat $purr_history_pointer_cache);"
 		'$(( cur_pointer -= 1 ));'
 		'if [ $cur_pointer -ge -1 ]; then'
@@ -84,7 +84,7 @@ history_down=(
 			'$(( cur_pointer += 1));'
 		'fi;'
 		'line_to_get="$((line_count - cur_pointer))";'
-		"/usr/bin/sed -n -e \${line_to_get}p $purr_history_cache;"
+		"sed -n -e \${line_to_get}p $purr_history_cache;"
 	')'
 )
 bind_commands+=('--bind' "alt-shift-down:$history_down")

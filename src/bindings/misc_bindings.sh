@@ -51,19 +51,19 @@ unbind_in_serial_command_suite "ctrl-h"
 # Bind: enter, select history command or serial selection.
 enter_cmd=(
 	'transform-query('
-		"if /usr/bin/grep -q \"History\" $purr_stream_header_cache; then"
+		"if grep -q \"History\" $purr_stream_header_cache; then"
 			'echo {};'
 		'else;'
 			'echo {q};'
 		'fi;'
 	')+execute-silent('
-		"if /usr/bin/grep -q \"History\" $purr_stream_header_cache; then"
+		"if grep -q \"History\" $purr_stream_header_cache; then"
 			"echo 'history' > $purr_accept_command_cache;"
 			$set_stream_verbose
 			$set_header_verbose
 			$set_slock_off
 			$save_current_query
-		"elif /usr/bin/grep -q \"Serial\" $purr_stream_header_cache; then"
+		"elif grep -q \"Serial\" $purr_stream_header_cache; then"
 			$stop_stream
 			"accepted=\$(echo {});"
 			'if [ ! -z $accepted ]; then'
@@ -75,7 +75,7 @@ enter_cmd=(
 			$set_slock_off
 			$save_current_query
 			$start_stream
-		"elif /usr/bin/grep -q \"ADB\" $purr_stream_header_cache; then"
+		"elif grep -q \"ADB\" $purr_stream_header_cache; then"
 			$set_slock_off
 			"echo 'adb_cmd' > $purr_accept_command_cache;"
 			$save_current_query

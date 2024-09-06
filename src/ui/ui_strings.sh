@@ -63,19 +63,19 @@ load_generic_header=(
 
 # Handles the UI logic of reloading the header.
 load_input_stream=(
-	"if /usr/bin/grep -q \"History\" $purr_stream_header_cache; then"
+	"if grep -q \"History\" $purr_stream_header_cache; then"
 		"cat $purr_input_stream_cache | zsh;"
-	"elif /usr/bin/grep -q \"Serial\" $purr_stream_header_cache; then"
+	"elif grep -q \"Serial\" $purr_stream_header_cache; then"
 		"cat $purr_input_stream_cache | zsh;"
-	"elif /usr/bin/grep -q \"ADB\" $purr_stream_header_cache; then"
+	"elif grep -q \"ADB\" $purr_stream_header_cache; then"
 		# If the user runs a command, put the full command as the first line.
-		"if /usr/bin/grep -q \"$adb_cmd_loc -s\" $purr_input_stream_cache; then"
+		"if grep -q \"$adb_cmd_loc -s\" $purr_input_stream_cache; then"
 			"echo \"Command: \$(cat $purr_input_stream_cache)\";"
 		"fi;"
 		"cat $purr_input_stream_cache | zsh |& tee;" # Prints all streams to stdout.
 	'else;'
 		$update_serial_cmd
-		"if $adb_cmd_loc devices | /usr/bin/grep \$serial &> /dev/null; then"
+		"if $adb_cmd_loc devices | grep \$serial &> /dev/null; then"
 			"echo \"\x1b[1;32m  \$serial => \x1b[1;0m\" >| $purr_connection_state_cache;"
 		'else;'
 			"echo \"\x1b[1;31m  \$serial != \x1b[1;0m\" >| $purr_connection_state_cache;"
@@ -90,17 +90,17 @@ instruction_preview_window="right,50%,nohidden,nofollow,wrap,<55(up,50%,nohidden
 instruction_preview_window_hidden="right,50%,hidden,nofollow,wrap,<55(up,50%,hidden,nofollow,wrap)"
 hint_preview=("change-preview($instruction_preview_command)+change-preview-window($instruction_preview_window)+change-preview-label()+refresh-preview")
 
-set_stream_error="echo \"/usr/bin/tail -F -n 99999999 $purr_error_input_cache $teecmd\" >| $purr_input_stream_cache;"
-set_stream_warning="echo \"/usr/bin/tail -F -n 99999999 $purr_warning_input_cache $teecmd\" >| $purr_input_stream_cache;"
-set_stream_info="echo \"/usr/bin/tail -F -n 99999999 $purr_info_input_cache $teecmd\" >| $purr_input_stream_cache;"
-set_stream_verbose="echo \"/usr/bin/tail -F -n 99999999 $purr_verbose_input_cache $teecmd\" >| $purr_input_stream_cache;"
+set_stream_error="echo \"tail -F -n 99999999 $purr_error_input_cache $teecmd\" >| $purr_input_stream_cache;"
+set_stream_warning="echo \"tail -F -n 99999999 $purr_warning_input_cache $teecmd\" >| $purr_input_stream_cache;"
+set_stream_info="echo \"tail -F -n 99999999 $purr_info_input_cache $teecmd\" >| $purr_input_stream_cache;"
+set_stream_verbose="echo \"tail -F -n 99999999 $purr_verbose_input_cache $teecmd\" >| $purr_input_stream_cache;"
 
-set_stream_error_unique="echo \"/usr/bin/tail -F -n 99999999 $purr_error_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
-set_stream_warning_unique="echo \"/usr/bin/tail -F -n 99999999 $purr_warning_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
-set_stream_info_unique="echo \"/usr/bin/tail -F -n 99999999 $purr_info_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
-set_stream_verbose_unique="echo \"/usr/bin/tail -F -n 99999999 $purr_verbose_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
+set_stream_error_unique="echo \"tail -F -n 99999999 $purr_error_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
+set_stream_warning_unique="echo \"tail -F -n 99999999 $purr_warning_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
+set_stream_info_unique="echo \"tail -F -n 99999999 $purr_info_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
+set_stream_verbose_unique="echo \"tail -F -n 99999999 $purr_verbose_input_cache_unique $teecmd\" >| $purr_input_stream_cache;"
 
-set_stream_adb="echo \"/usr/bin/tail -F -n 99999999 $purr_adb_cache $teecmd\" >| $purr_input_stream_cache;"
+set_stream_adb="echo \"tail -F -n 99999999 $purr_adb_cache $teecmd\" >| $purr_input_stream_cache;"
 
 # Sets the stream header to a given message.
 set_header_error="echo \"$stream_error_msg\" >| $purr_stream_header_cache;"
@@ -126,13 +126,13 @@ set_unique_on="echo \"$unique_on_msg\" >| $purr_unique_cache;"
 set_unique_off="echo \"$unique_off_msg\" >| $purr_unique_cache;"
 
 # Boolean to determine state of scroll lock.
-is_slock_on="/usr/bin/grep -q  \"On\" \"$purr_slock_cache\""
+is_slock_on="grep -q  \"On\" \"$purr_slock_cache\""
 
 # Boolean to determine state of unique mode.
-is_unique_on="/usr/bin/grep -q  \"On\" \"$purr_unique_cache\""
+is_unique_on="grep -q  \"On\" \"$purr_unique_cache\""
 
 # Boolean to determine state of sort order.
-is_sort_chrono="/usr/bin/grep -q  \"Chronological\" \"$purr_sort_header_cache\""
+is_sort_chrono="grep -q  \"Chronological\" \"$purr_sort_header_cache\""
 
 # Injects an empty line to force fzf to refresh the input stream.
 inject_empty_line="echo \"\";"
@@ -144,7 +144,7 @@ stream_serial_msg="\x1b[1;36mSerial\x1b[1;0m\t\t"
 set_stream_history="echo \"cat $purr_history_cache\" >| $purr_input_stream_cache;"
 set_header_history="echo \"$stream_history_msg\" >| $purr_stream_header_cache;"
 
-set_stream_serial="echo \"$adb_cmd_loc devices | /usr/bin/tail -n +2 |/usr/bin/sed '/^\s*$/d' | /usr/bin/sort | awk '{print \$ 1}'\" >| $purr_input_stream_cache;"
+set_stream_serial="echo \"$adb_cmd_loc devices | tail -n +2 |sed '/^\s*$/d' | sort | awk '{print \$ 1}'\" >| $purr_input_stream_cache;"
 set_header_serial="echo \"$stream_serial_msg\" >| $purr_stream_header_cache;"
 
 hint_preview_window="top,70%,nohidden,wrap,+200/2"

@@ -23,7 +23,7 @@ echo $stream_verbose_msg >|$purr_stream_header_cache
 echo $slock_off_msg >|$purr_slock_cache
 echo $unique_off_msg >|$purr_unique_cache
 echo $sorting_chronological >|$purr_sort_header_cache
-echo "/usr/bin/tail -F -n 99999999 $purr_verbose_input_cache $teecmd" >|$purr_input_stream_cache
+echo "tail -F -n 99999999 $purr_verbose_input_cache $teecmd" >|$purr_input_stream_cache
 echo -1 >|$purr_history_pointer_cache
 echo 0 >|$purr_history_counter_cache
 

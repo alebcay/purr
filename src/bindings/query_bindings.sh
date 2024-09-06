@@ -19,7 +19,7 @@ get_tag_cmd=(
 	'execute-silent('
 		'tag=$(echo "{}" | xargs | xargs | cut -d" " -f6);'
 		'cur_query=$(echo "{q}" | xargs | xargs);'
-		'if echo $cur_query | /usr/bin/grep -w -q -- "$tag"; then'
+		'if echo $cur_query | grep -w -q -- "$tag"; then'
 			"echo \"\$cur_query\" > $purr_query_cache;"
 		'elif [ -z $cur_query ]; then'
 			"echo \"\$tag\" > $purr_query_cache;"
@@ -44,8 +44,8 @@ remove_tag_cmd=(
 		'tag=$(echo "{}" | xargs | xargs | cut -d" " -f6);'
 		'negative_tag="!$tag";'
 		'cur_query=$(echo "{q}" | xargs | xargs);'
-		'if echo $cur_query | /usr/bin/grep -w -q -- "$tag"; then'
-			'untagged_query=$(echo "$cur_query" | /usr/bin/sed "s/\b$tag\b//g" | /usr/bin/sed "s/\b$tag//g" | xargs);'
+		'if echo $cur_query | grep -w -q -- "$tag"; then'
+			'untagged_query=$(echo "$cur_query" | sed "s/\b$tag\b//g" | sed "s/\b$tag//g" | xargs);'
 			"echo \"\$untagged_query\" > $purr_query_cache;"
 		'elif [ -z $cur_query ]; then'
 			"echo \"\$negative_tag\" > $purr_query_cache;"

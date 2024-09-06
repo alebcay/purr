@@ -24,51 +24,51 @@ __purr_create_files() {
 
 	# File to print input into.
 	purr_input_cache="$dir_name/purr-input-cache.purr"
-	/usr/bin/touch $purr_input_cache
+	touch $purr_input_cache
 
 	# File to print input into.
 	purr_instruction_cache="$dir_name/instructions.purr"
-	/usr/bin/touch $purr_instruction_cache
+	touch $purr_instruction_cache
 
 	# File to use for editor input.
 	purr_editor_input_cache="$dir_name/editor-input-cache.purr"
-	/usr/bin/touch $purr_editor_input_cache
+	touch $purr_editor_input_cache
 
 	# File to use to keep track of input stream.
 	purr_input_stream_cache="$dir_name/input-stream.purr"
-	/usr/bin/touch $purr_input_stream_cache
+	touch $purr_input_stream_cache
 
 	# File to use to keep track of the stream header message.
 	purr_stream_header_cache="$dir_name/stream-header.purr"
-	/usr/bin/touch $purr_stream_header_cache
+	touch $purr_stream_header_cache
 
 	# File to use to keep track of the query during aborting commands.
 	purr_query_cache="$dir_name/query-cache.purr"
-	/usr/bin/touch $purr_query_cache
+	touch $purr_query_cache
 
 	# File to use to keep track of the sort header message.
 	purr_sort_header_cache="$dir_name/sort-header.purr"
-	/usr/bin/touch $purr_sort_header_cache
+	touch $purr_sort_header_cache
 
 	# File to use to keep track of whether scroll lock is on.
 	purr_slock_cache="$dir_name/scroll-lock-header.purr"
-	/usr/bin/touch $purr_slock_cache
+	touch $purr_slock_cache
 
 	# File to use to keep track of the serial number.
 	purr_serial_cache="$dir_name/serial-cache.purr"
-	/usr/bin/touch $purr_serial_cache
+	touch $purr_serial_cache
 
 	# File to use to keep track of the state of the device connection.
 	purr_connection_state_cache="$dir_name/connection-state.purr"
-	/usr/bin/touch $purr_connection_state_cache
+	touch $purr_connection_state_cache
 
 	# File to use to keep track of the state of the fzf preview window's visibility.
 	purr_preview_visible_cache="$dir_name/preview-visibility-cache.purr"
-	/usr/bin/touch $purr_preview_visible_cache
+	touch $purr_preview_visible_cache
 
 	# File to use to keep track of the state of the fzf preview window's command.
 	purr_preview_command_cache="$dir_name/preview-command-cache.purr"
-	/usr/bin/touch $purr_preview_command_cache
+	touch $purr_preview_command_cache
 
 	# Pipe to communicate with the background handler.
 	thread_io_pipe=$dir_name/thread_io_pipe
@@ -76,14 +76,14 @@ __purr_create_files() {
 
 	# File to communicate what the accept command intent was.
 	purr_accept_command_cache="$dir_name/purr_accept_command_cache.purr"
-	/usr/bin/touch $purr_accept_command_cache
+	touch $purr_accept_command_cache
 
 	# File to keep track of what time we want to start at.
 	purr_time_start_cache="$dir_name/purr_time_start_cache.purr"
-	/usr/bin/touch $purr_time_start_cache
+	touch $purr_time_start_cache
 
 	purr_unique_cache="$dir_name/purr_unique_cache.purr"
-	/usr/bin/touch $purr_unique_cache
+	touch $purr_unique_cache
 
 	# Files to input cache the streams into.
 	purr_error_input_cache="$dir_name/error-input-cache.purr"
@@ -105,22 +105,22 @@ __purr_create_files() {
 
 	# File to use for purr history. This file is not removed between sessions.
 	purr_history_cache="/var/tmp/history.purr"
-	/usr/bin/touch $purr_history_cache
+	touch $purr_history_cache
 
 	# File to use for the purr history counter.
 	purr_history_counter_cache="$dir_name/history-counter.purr"
-	/usr/bin/touch $purr_history_counter_cache
+	touch $purr_history_counter_cache
 
 	# File to use for purr history location.
 	purr_history_pointer_cache="$dir_name/history-pointer.purr"
-	/usr/bin/touch $purr_history_pointer_cache
+	touch $purr_history_pointer_cache
 
 	purr_spc_purpose_cache="$dir_name/spc-purpose-cache.purr"
-	/usr/bin/touch $purr_spc_purpose_cache
+	touch $purr_spc_purpose_cache
 
 	# We'll use this to cache the result of ADB commands.
 	purr_adb_cache="$dir_name/adb-cache.purr"
-	/usr/bin/touch $purr_adb_cache
+	touch $purr_adb_cache
 }
 
 # Writes the instruction file which will be displayed in the

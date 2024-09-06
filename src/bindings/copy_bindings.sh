@@ -36,7 +36,7 @@ cmd_bug_report=(
 		'info_array=("\`\`\`");'
 		'info_array+=("\nFingerprint:" $(' "$adb_cmd_loc" ' -s $serial shell getprop | grep "ro.build.fingerprint"));'
 		'info_array+=("\nSDK Version:" $(' "$adb_cmd_loc" ' -s $serial shell getprop | grep "ro.build.version.sdk"));'
-		'info_array+=("\nGMS Version:" $(' "$adb_cmd_loc" ' -s $serial shell dumpsys package com.google.android.gms | grep "versionName" | /usr/bin/head -n 1));'
+		'info_array+=("\nGMS Version:" $(' "$adb_cmd_loc" ' -s $serial shell dumpsys package com.google.android.gms | grep "versionName" | head -n 1));'
 		'info_array+=("\n\`\`\`");'
 		"echo \"\$info_array\" | $purr_copy_program > $target_tty;"
 		'{'

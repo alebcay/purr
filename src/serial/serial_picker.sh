@@ -32,11 +32,11 @@ pick_serial() {
 		__pick_serial_wait
 
 		adb_devices=$(eval "$adb_cmd_loc devices | tail -n +2 | sed '/^\s*$/d' | sort")
-		device_count=$(echo $adb_devices | /usr/bin/wc -l)
+		device_count=$(echo $adb_devices | wc -l)
 
 		# Checks how many devices are in a non-connected state.
-		local disconnected_devices=$(/usr/bin/grep ".*offline.*" <<<$adb_devices | sort)
-		local disconnected_count=$(/usr/bin/grep -c ".*offline.*" <<<$adb_devices | sort)
+		local disconnected_devices=$(grep ".*offline.*" <<<$adb_devices | sort)
+		local disconnected_count=$(grep -c ".*offline.*" <<<$adb_devices | sort)
 
 		# Checks whether there are any devices left that can be connected to.
 		if [ $disconnected_count -eq $device_count ]; then
@@ -49,7 +49,7 @@ pick_serial() {
 		elif [ $disconnected_count -ne 0 ]; then
 			echo >&2 "Skipped offline devices:"
 			echo >&2 $disconnected_devices
-			adb_devices=$(/usr/bin/grep -v ".*offline.*" <<<$adb_devices | sort)
+			adb_devices=$(grep -v ".*offline.*" <<<$adb_devices | sort)
 		fi
 	done
 

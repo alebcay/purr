@@ -193,7 +193,7 @@ __purr_stream_unique_file() {
 				echo "Erasing duplicate line..." >> $stream_output_file
 			fi
 		else
-			if ! /usr/bin/grep -q "$trimmed_line_cksum" $stream_checksum_file 2> /dev/null; then
+			if ! grep -q "$trimmed_line_cksum" $stream_checksum_file 2> /dev/null; then
 				echo "$line" >> $stream_output_file
 				echo "$trimmed_line_cksum" >> $stream_checksum_file
 			else
